@@ -1,6 +1,6 @@
 import AuthLogin from '@/components/Login';
 import AuthRegistration from "@/components/Registration";
-import { createRouter, createWebHashHistory } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
     {
@@ -14,17 +14,25 @@ const routes = [
         name: 'registration',
         component: AuthRegistration,
         meta: { authPage: true }
+    },
+    {
+        path: '/',
+        redirect: '/personal-area'
+    },
+    {
+        path: '/:pathMatch(.*)*',
+        component: { template: '<div>Page Not Found</div>' }
     }
 ]
 
 const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes
 });
 
 router.beforeEach(async (to, from, next) => {
     if (!localStorage.getItem('authorization_token') && !to.meta.authPage){
-        next({ name: 'registration' });
+        next({ name: 'login' });
     }
     next()
 });
