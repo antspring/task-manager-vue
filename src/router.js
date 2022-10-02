@@ -7,7 +7,8 @@ const routes = [
         path: '/login',
         name: 'login',
         component: AuthLogin,
-        meta: { authPage: true }
+        meta: { authPage: true },
+        alias: '/'
     },
     {
         path: '/registration',
@@ -16,8 +17,8 @@ const routes = [
         meta: { authPage: true }
     },
     {
-        path: '/',
-        redirect: '/personal-area'
+        path: '/personal-area',
+        name: 'personal-area',
     },
     {
         path: '/:pathMatch(.*)*',
@@ -33,6 +34,8 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
     if (!localStorage.getItem('authorization_token') && !to.meta.authPage){
         next({ name: 'login' });
+    }else if (localStorage.getItem('authorization_token') && to.meta.authPage){
+        next({ name: 'personal-area' });
     }
     next()
 });

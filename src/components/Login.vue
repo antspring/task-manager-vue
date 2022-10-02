@@ -29,6 +29,7 @@
 
 <script>
 import axios from 'axios'
+import router from '../router';
 
 export default {
   name: 'AuthLogin',
@@ -49,7 +50,8 @@ export default {
       event.preventDefault()
       axios.post('http://task-manager-api/api/token/regenerate', { email:this.email, password: this.password })
           .then(response => {
-            localStorage.setItem('authorization_token', response.data.token)
+            localStorage.setItem('authorization_token', response.data.token);
+            router.push({ name: 'personal-area' })
           }).catch(exception => {
             this.displayError(exception);
           })
