@@ -1,5 +1,6 @@
 import AuthLogin from '@/components/Login';
 import AuthRegistration from "@/components/Registration";
+import PersonalArea from '@/components/PersonalArea'
 import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
@@ -19,6 +20,7 @@ const routes = [
     {
         path: '/personal-area',
         name: 'personal-area',
+        component: PersonalArea
     },
     {
         path: '/:pathMatch(.*)*',

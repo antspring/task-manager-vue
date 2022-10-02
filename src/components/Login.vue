@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
 import router from '../router';
 
 export default {
@@ -42,24 +42,24 @@ export default {
   methods: {
     resetFieldsForErrors(){
       document.querySelectorAll('input').forEach(input => {
-        input.parentElement.querySelector('div').innerText = ''
+        input.parentElement.querySelector('div').innerText = '';
       })
     },
     sendLoginData(event){
-      this.resetFieldsForErrors()
-      event.preventDefault()
+      this.resetFieldsForErrors();
+      event.preventDefault();
       axios.post('http://task-manager-api/api/token/regenerate', { email:this.email, password: this.password })
           .then(response => {
             localStorage.setItem('authorization_token', response.data.token);
-            router.push({ name: 'personal-area' })
+            router.push({ name: 'personal-area' });
           }).catch(exception => {
             this.displayError(exception);
           })
     },
     displayError(exception){
-      const errors = exception.response.data.errors
+      const errors = exception.response.data.errors;
       for (let error in errors){
-        document.querySelector(`input[name=${error}]`).parentElement.querySelector('div').innerText = errors[error]
+        document.querySelector(`input[name=${error}]`).parentElement.querySelector('div').innerText = errors[error];
       }
     }
   }
