@@ -14,7 +14,7 @@ const store = createStore({
     },
     actions: {
         GET_USER({commit}) {
-            return axios.get('http://task-manager-api/api/user-info').then((user) => {
+            return axios.get('http://192.168.1.252:8080/api/user-info').then((user) => {
                 commit('SET_USER_TO_STATE', user.data);
                 return user.data;
             }).catch(error => {
@@ -23,8 +23,17 @@ const store = createStore({
         }
     },
     getters: {
-        user: (state) => {
-            return state.user;
+        name: (state) => {
+            return state.user.name
+        },
+        email: (state) => {
+            return state.user.email
+        },
+        image: (state) => {
+            return state.user.image
+        },
+        info: (state) => {
+            return state.user.info
         }
     }
 });

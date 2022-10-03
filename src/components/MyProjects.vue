@@ -18,7 +18,7 @@
     <div class="projects">
       <div class="projects__list">
         <a href="#" class="project__item">
-          <p class="project__name">#</p>
+          <p class="project__name">{{ $store.getters.name }}</p>
           <div class="project__desc">
             <div class="project-indicator success"></div>
           </div>

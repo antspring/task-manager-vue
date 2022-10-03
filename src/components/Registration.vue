@@ -48,6 +48,7 @@
 
 import axios from "axios";
 import router from "@/router";
+import store from "@/store";
 
 export default {
   name: 'AuthRegistration',
@@ -69,13 +70,16 @@ export default {
     sendLoginData(event){
       this.resetFieldsForErrors();
       event.preventDefault();
-      axios.post('http://task-manager-api/api/token/create', { name: this.name, email:this.email, password: this.password, password_confirmation: this.password_confirmation, rules: this.rules })
+      axios.post('http://192.168.1.252:8080/api/token/create', { name: this.name, email:this.email, password: this.password, password_confirmation: this.password_confirmation, rules: this.rules })
           .then(response => {
             localStorage.setItem('authorization_token', response.data.token);
+            axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('authorization_token')}`;
+            store.dispatch('GET_USER');
             router.push({ name: 'personal-area' });
           }).catch(exception => {
-        this.displayError(exception);
-      })
+            this.displayError(exception);
+          });
+      store.dispatch('GET_USER');
     },
     displayError(exception){
       const errors = exception.response.data.errors;
