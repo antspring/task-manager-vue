@@ -3,9 +3,9 @@
     <div class="side-bar__top">
       <div class="side-bar__logo">
         <div class="qwerty">
-          <img style="width: 100%; height: 100%; object-fit: cover" :src="$store.getters.image" alt="">
+          <img style="width: 100%; height: 100%; object-fit: cover" :src="$store.getters.user.image" alt="">
         </div>
-        <p class="side-bar__logo-name">{{ $store.getters.name }}</p>
+        <p class="side-bar__logo-name">{{ $store.getters.user.name }}</p>
       </div>
       <ul class="side-bar__list">
         <li class="side-bar__item">

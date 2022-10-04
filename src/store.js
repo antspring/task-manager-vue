@@ -23,17 +23,8 @@ const store = createStore({
         }
     },
     getters: {
-        name: (state) => {
-            return state.user.name
-        },
-        email: (state) => {
-            return state.user.email
-        },
-        image: (state) => {
-            return state.user.image
-        },
-        info: (state) => {
-            return state.user.info
+        user: (state) => {
+            return state.user
         }
     }
 });
