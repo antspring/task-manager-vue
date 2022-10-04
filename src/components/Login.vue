@@ -30,7 +30,7 @@
 <script>
 import axios from 'axios';
 import router from '../router';
-import store from "@/store";
+import { setSettings } from "@/authSettings";
 
 export default {
   name: 'AuthLogin',
@@ -49,11 +49,10 @@ export default {
     sendLoginData(event){
       this.resetFieldsForErrors();
       event.preventDefault();
-      axios.post('http://192.168.1.252:8080/api/token/regenerate', { email:this.email, password: this.password })
+      axios.post('api/token/regenerate', { email:this.email, password: this.password })
           .then(response => {
             localStorage.setItem('authorization_token', response.data.token);
-            axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('authorization_token')}`;
-            store.dispatch('GET_USER');
+            setSettings();
             router.push({ name: 'personal-area' });
           }).catch(exception => {
             this.displayError(exception);

@@ -14,7 +14,7 @@ const store = createStore({
     },
     actions: {
         GET_USER({commit}) {
-            return axios.get('http://192.168.1.252:8080/api/user-info').then((user) => {
+            return axios.get('api/user-info').then((user) => {
                 commit('SET_USER_TO_STATE', user.data);
                 return user.data;
             }).catch(error => {

@@ -3,10 +3,11 @@ import App from './App.vue';
 import router from './router';
 import axios from 'axios';
 import store from './store';
+import { setSettings } from "@/authSettings";
 
-axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('authorization_token')}`;
+axios.defaults.baseURL = 'http://192.168.1.252:8080/';
 
-store.dispatch('GET_USER');
+setSettings();
 
 const app = createApp(App);
 
