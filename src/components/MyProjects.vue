@@ -17,13 +17,14 @@
     </div>
     <div class="projects">
       <div class="projects__list">
-        <a href="#" class="project__item">
-          <p class="project__name"></p>
+        <a v-for="project in $store.getters.projects" :key="project.id" :href="project.id" class="project__item">
+          <p class="project__name">{{ project.name }}</p>
           <div class="project__desc">
             <div class="project-indicator success"></div>
+            Новых задач - {{ project.amount_new }}
           </div>
         </a>
-        <div class="project__item">
+        <div v-if="!$store.getters.projects" class="project__item">
           <p class="project__name">У вас нет проектов</p>
         </div>
       </div>
